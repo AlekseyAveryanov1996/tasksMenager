@@ -1,9 +1,10 @@
 <script setup>
-
+import Tasks from "./components/Tasks.vue";
+  components: { Tasks }
 </script>
 
 <template>
-  test template
+  <Tasks />
 </template>
 
 <style scoped>
