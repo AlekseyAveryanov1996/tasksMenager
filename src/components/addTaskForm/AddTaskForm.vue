@@ -15,25 +15,18 @@ import { ref } from 'vue';
 
   function addTask(e) {
     e.preventDefault();
-    // console.log(inputTasks.value);
-    // console.log(inputDescription.value);
-    // console.log(directorTask.value);
-    // console.log(responsibleTask.value);
-    // console.log(startDate.value.getTime());
-    // console.log(endDate.value.getTime());
     let task = {
-      titleTask: inputTasks.value, //Заголовок
-      descriptionTask: inputDescription.value, // Описание
-      directorTask: directorTask.value, // Постановщик
-      responsibleTask: responsibleTask.value, // Ответственный
-      startDate: startDate.value.getTime(), // Дата начала работ
-      endDate: endDate.value.getTime(), // Дата окончания работ
+      id: '4',
+      title: inputTasks.value, //Заголовок
+      description: inputDescription.value, // Описание
+      userFrom: directorTask.value, // Постановщик
+      userTo: responsibleTask.value, // Ответственный
+      dateCreated: startDate.value.getTime(), // Дата начала работ
+      dateClosed: endDate.value.getTime(), // Дата окончания работ
+      subTasks: [],
     }
 
-    console.log(task)
-    // fetch(http://localhost/tasks/, {method:”post”, body:{title:”t1”, description:”d1”}})
-
-    let response = fetch('http://localhost/tasks/', {
+    let response = fetch('http://localhost:3000/tasks/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -41,8 +34,7 @@ import { ref } from 'vue';
       body: JSON.stringify(task)
     }).then(res=>res.status);
 
-    // let result = response.json();
-    console.log(response.message);
+    // console.log(response);
   }
 
   
