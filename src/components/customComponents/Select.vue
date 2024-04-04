@@ -1,24 +1,21 @@
 <script setup>
-import { Suspense } from 'vue';
+import { onMounted, ref } from "vue";
+import axios from "axios";
 
   defineProps(['titleSelect']);
-  const model = defineModel()
+  const model = defineModel();
+  const users = ref([]); // записываем сюда юзеров
 
-  // ЗАПРОС К СПИСКУ ПОЛЬЗОВАТЕЛЕЙ
-  const API = fetch('http://localhost:3000/users/')
-  const users = await API.json();
-  // const users = [
-  //   {
-  //     id: 1,
-  //     name: 'name'
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'name2'
-  //   },
-  // ]
-
-  console.log(users);
+  onMounted(() => {
+    axios
+      .get("http://localhost:3000/users/")
+      .then((response) => {
+        users.value = response.data;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
 
 </script>
 
@@ -26,11 +23,9 @@ import { Suspense } from 'vue';
   <div class="select">
     <div class="select__title">{{titleSelect}}</div>
     <div class="select__dropdown">
-      <Suspense>
         <select v-model="model">
           <option v-for="user in users" :key="user.id" :value="user.id">{{ user.name }}</option>
         </select>
-      </Suspense>
     </div>
   </div>
   

@@ -2,7 +2,8 @@
 import Input from '../customComponents/Input.vue'
 import Select from '../customComponents/Select.vue'
 import DateInput from '../customComponents/DateInput.vue'
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import axios from "axios";
   
   const tasks = ref([]);
 
@@ -13,10 +14,21 @@ import { ref } from 'vue';
   let startDate = ref('');
   let endDate = ref('');
 
+  // ПОЛУЧАЕМ СПИСОК ЗАДАЧ
+  function getTasks() {
+    axios
+      .get("http://localhost:3000/tasks/")
+      .then((response) => {
+        tasks.value = response.data;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   function addTask(e) {
     e.preventDefault();
     let task = {
-      id: '4',
       title: inputTasks.value, //Заголовок
       description: inputDescription.value, // Описание
       userFrom: directorTask.value, // Постановщик
@@ -34,10 +46,13 @@ import { ref } from 'vue';
       body: JSON.stringify(task)
     }).then(res=>res.status);
 
-    // console.log(response);
+    getTasks(); // ОБНОВЛЯЕМ СПИСОК ЗАДАЧ
   }
 
   
+  onMounted(() => {
+    getTasks();
+  });
 
 </script>
 
@@ -57,7 +72,7 @@ import { ref } from 'vue';
   <div class="tasks">
     <div class="tasks__title">Список задач:</div>
     <ul class="tasks__lists">
-      <li>1</li>
+      <li v-for="task in tasks" :key="task.id">{{ task.title }}</li>
     </ul>
   </div>
 
