@@ -1,0 +1,78 @@
+// Resolution
+base = 1920
+wide = 1600
+screen = 1420
+desktop = 1300
+tabletLarge = 1200
+tablet = 980
+mobile = 765
+sMobile = 660
+
+// @media
+max(size)
+  @media all and (max-width: size px)
+    {block}
+min(size)
+  @media all and (min-width: size px)
+    {block}
+between(sizefrom, sizeto)
+  @media(min-width: sizefrom px) and (max-width: sizeto px)  
+    {block}
+
+max_phone(width,height)
+  @media (min-width: mobile px) and (max-height: height px)
+    {block}
+  @media all and (max-width: width px)
+    {block}
+
+noUserSelect()
+  -webkit-user-select none
+  -moz-user-select none
+  -ms-user-select none
+
+//transition time
+  // $trans = .2s ease
+
+:root
+  --colorText: #ffffff
+  --color1: #0b0a2c
+  --color2: #191547
+  --color3: #5178f9
+    
+
+// если нужны внешние отступы с центрирование контента по центру добавляем padding к блоку
+// если нужны внутриние отступы с центрирование контента по центру добавляем margin к блоку
+// padding: 0 "calc(50% - %s / 2)" % (--contentWidth);
+// margin: 0 "calc(50% - %s / 2)" % (--contentWidth);
+
+// Path
+link(file)
+  return url(/img/file)
+
+// SVG fix
+svg
+  transform translate3d(0,0,0)
+
+// Placeholder
+ph(opt,val)
+  &::-webkit-input-placeholder
+    {opt} val
+  &::-moz-placeholder
+    {opt} val
+  &:-moz-placeholder
+    {opt} val
+  &::placeholder
+    {opt} val
+  &:-ms-input-placeholder
+    {opt} val
+
+#map
+  [class$='-copyrights-pane']
+    opacity 0
+    pointer-events none
+#ctrlcopy
+  color transparent
+  height 1px
+  overflow hidden
+  position absolute
+  width 1px
