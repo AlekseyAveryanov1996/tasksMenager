@@ -1,7 +1,7 @@
 <script setup>
-import Input from '../customComponents/Input.vue'
-import Select from '../customComponents/Select.vue'
-import DateInput from '../customComponents/DateInput.vue'
+import Input from '@/components/customComponents/Input.vue'
+import Select from '@/components/customComponents/Select.vue'
+import DateInput from '@/components/customComponents/DateInput.vue'
 import { ref, onMounted } from 'vue';
 import axios from "axios";
   

@@ -1,5 +1,5 @@
 <script setup>
-  import Aside from "./components/Aside/Aside.vue";
+  import Aside from "@/components/Aside/Aside.vue";
 </script>
 
 <template>
@@ -32,7 +32,7 @@ body, html
   max-width: 2560px
   margin 0 auto
 .wrapper-container
-  background: var(--color1)
+  background: linear-gradient(92.28deg, #0B0A2C 0%, #453BB4 100%);
   margin-left: auto
   margin-right: auto
   height: 100vh
@@ -41,6 +41,6 @@ body, html
   flex-direction: column
   +min(mobile)
     display: grid
-    grid-template-columns: minmax(0px, 350px) 1fr
+    grid-template-columns: minmax(0px, 225px) 1fr
   
 </style>
