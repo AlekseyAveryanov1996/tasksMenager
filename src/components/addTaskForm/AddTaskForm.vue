@@ -49,6 +49,16 @@ import axios from "axios";
     getTasks(); // ОБНОВЛЯЕМ СПИСОК ЗАДАЧ
   }
 
+  /*
+  fetch('http://5.35.86.160:3000/users/auth', 
+  {method: 'POST',
+  body: JSON.stringify({
+    nick:'IgorVasin', 
+    password: 'password12345678'}),
+  headers: {'Content-Type': 'application/json'}})
+  .then(res=> res.json()).then(data => console.log(data)) */
+  
+
   
   onMounted(() => {
     getTasks();
