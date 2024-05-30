@@ -26,6 +26,7 @@
   width 100%
   display: flex
   flex-direction: column
+  color: var(--colorText)
   +min(mobile)
     display: grid
     grid-template-columns: minmax(0px, 225px) 1fr
