@@ -21,10 +21,8 @@
 </script>
 
 <template>
-  <div>
     <component :is="components[currentComponentName]"></component>
-    <button @click="toggleCurrentComponent">Toggle</button>
-  </div>
+    <v-btn @click="toggleCurrentComponent">Toggle</v-btn>
 </template>
 
 <style lang="stylus">
