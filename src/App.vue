@@ -3,13 +3,16 @@
   import HomeView from './views/HomeView.vue';
   import { ref } from "vue";
 
+  // переменная для переключения шаблонов динамически
   const currentComponentName = ref("LogIn");
 
+  // объект с шаблоанами для переключения
   const components = {
     LogIn,
     HomeView,
   }
 
+  // функция переключения динамических шаблоннов
   const toggleCurrentComponent = () => {
     currentComponentName.value =
       currentComponentName.value == "LogIn" ? "HomeView" : "LogIn";
