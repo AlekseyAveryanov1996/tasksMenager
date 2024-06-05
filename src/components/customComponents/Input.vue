@@ -1,12 +1,12 @@
 <script setup>
-  defineProps(['title', 'placeHolderValue'])
+  defineProps(['title', 'placeHolderValue', 'typeValue'])
   const model = defineModel()
 </script>
 
 <template>
   <div class="custom-input">
     <div class="custom-input__title">{{title}}</div>
-    <input type="text" :placeholder="placeHolderValue" v-model="model" >
+    <input :type="typeValue" :placeholder="placeHolderValue" v-model="model" >
   </div>
 </template>
 

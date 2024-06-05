@@ -68,8 +68,8 @@ import axios from "axios";
 
 <template>
   <form action="">
-    <Input  title="Заголовок" placeHolderValue="Введите заголовок задачи" v-model="inputTasks" />
-    <Input  title="Описание" placeHolderValue="Введите Описание задачи" v-model="inputDescription" />
+    <Input  title="Заголовок" typeValue="text" placeHolderValue="Введите заголовок задачи" v-model="inputTasks" />
+    <Input  title="Описание" typeValue="text" placeHolderValue="Введите Описание задачи" v-model="inputDescription" />
     <Select titleSelect="Кто ставит задачу" v-model="directorTask" />
     <Select titleSelect="Кому поставить задачу" v-model="responsibleTask" />
     <DateInput titleDate="Дата начала:" v-model="startDate"/>
