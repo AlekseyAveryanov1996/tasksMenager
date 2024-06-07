@@ -17,7 +17,7 @@ import axios from "axios";
   // ПОЛУЧАЕМ СПИСОК ЗАДАЧ
   function getTasks() {
     axios
-      .get("http://localhost:3000/tasks/")
+      .get("http://5.35.86.160:3000/tasks/")
       .then((response) => {
         tasks.value = response.data;
       })
@@ -38,7 +38,7 @@ import axios from "axios";
       subTasks: [],
     }
 
-    let response = fetch('http://localhost:3000/tasks/', {
+    let response = fetch('http://5.35.86.160:3000/tasks/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'

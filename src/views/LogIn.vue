@@ -21,6 +21,7 @@ import axios from "axios";
           }
         }
         ).then((response) => {
+          console.log(response);
           localStorage.setItem('statusLogIn', response.statusText); // передаем статус если все правильно
           emit('toggleCurrentComponent'); // вызываем функцию в родителе, чтобы переключить компонент
         }).catch((error) => {

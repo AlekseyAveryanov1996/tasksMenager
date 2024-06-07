@@ -8,7 +8,7 @@ import axios from "axios";
 
   onMounted(() => {
     axios
-      .get("http://localhost:3000/users/")
+      .get("http://5.35.86.160:3000/users/")
       .then((response) => {
         users.value = response.data;
       })
