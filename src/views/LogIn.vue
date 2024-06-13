@@ -1,7 +1,9 @@
 <script setup>
 import Input from '@/components/customComponents/Input.vue';
+import InputText from 'primevue/inputtext';
 import { ref } from "vue";
 import axios from "axios";
+
 
   const emit = defineEmits(['toggleCurrentComponent']) // получаем родительские функции
   const user = ref('');
@@ -40,8 +42,13 @@ import axios from "axios";
         <div class="log__title">Авторизация в системе</div>
         <form class="log__form log-form">
           <div class="log-form__header">
-            <Input typeValue="text" title="Имя пользователя" placeHolderValue="Введите ваше имя пользователя" v-model="user" />
+            <Input typeValue="text" title="Имя пользователя" placeHolderValue="Введите ваше имя пользователя" v-model="user" colorTextClass="text-gray-50" icon="pi pi-user" />
             <Input typeValue="password"  title="Пароль" placeHolderValue="Введите ваш пароль" v-model="password" />
+            <!-- <div class="flex flex-col gap-2 text-gray-50">
+                <label for="username">Пользователь</label>
+                <InputText id="username" v-model="user" aria-describedby="username-help" class="!border-solid !border-1 !border-indigo-600 !rounded-md "/>
+                <small id="username-help">Укажите свое имя пользователя.</small>
+            </div> -->
           </div>
           <div class="log-form__bottom">
             <div class="log-form__btns">

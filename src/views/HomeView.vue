@@ -1,5 +1,6 @@
 <script setup>
   import Aside from "@/components/Aside/Aside.vue";
+  import Button from "primevue/button";
 </script>
 
 <template>
@@ -7,7 +8,7 @@
     <Aside />
     <main class="main-content">
       <div class="header">
-        header
+        <Button label="Кнопка" icon="pi pi-user"/>
       </div>
       <div class="content-block">
         <RouterView />

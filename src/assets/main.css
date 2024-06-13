@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 *,
 *::before,
 *::after {
@@ -192,9 +196,9 @@ audio:not([controls]) {
 
 img {
   border: 0;
-  width: 100%
-  height: auto
-  object-fit: cover
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 svg:not(:root) {
