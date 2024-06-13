@@ -6,5 +6,6 @@
   <AddTaskForm />
 </template>
 
-<style>
+<style lang="stylus" scoped>
+
 </style>

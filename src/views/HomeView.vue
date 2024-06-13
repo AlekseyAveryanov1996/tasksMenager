@@ -22,7 +22,8 @@
   background: linear-gradient(92.28deg, #0B0A2C 0%, #453BB4 100%);
   margin-left: auto
   margin-right: auto
-  height: 100vh
+  height: 100%
+  min-height: 100dvh
   width 100%
   display: flex
   flex-direction: column

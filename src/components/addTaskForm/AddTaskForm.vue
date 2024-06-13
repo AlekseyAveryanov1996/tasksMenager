@@ -33,8 +33,8 @@ import axios from "axios";
       description: inputDescription.value, // Описание
       userFrom: directorTask.value, // Постановщик
       userTo: responsibleTask.value, // Ответственный
-      dateCreated: startDate.value.getTime(), // Дата начала работ
-      dateClosed: endDate.value.getTime(), // Дата окончания работ
+      dateCreate: startDate.value.getTime(), // Дата начала работ
+      dateTo: endDate.value.getTime(), // Дата окончания работ
       subTasks: [],
     }
 
@@ -44,9 +44,11 @@ import axios from "axios";
         'Content-Type': 'application/json;charset=utf-8'
       },
       body: JSON.stringify(task)
-    }).then(res=>res.status);
-
-    getTasks(); // ОБНОВЛЯЕМ СПИСОК ЗАДАЧ
+    }).then((res) => { 
+      res.status;
+      getTasks(); // ОБНОВЛЯЕМ СПИСОК ЗАДАЧ
+    });
+    
   }
 
   /*
