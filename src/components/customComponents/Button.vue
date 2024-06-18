@@ -13,7 +13,7 @@
 <style lang="stylus" scoped>
   .btn
     text-transform: uppercase
-    padding: 12px 20px
+    padding: 8px 16px
     width 100%
     max-width: fit-content
     color: var(--colorText)
@@ -24,8 +24,11 @@
     border: 2px solid rgb(146, 148, 248);
     position: relative;
     overflow: hidden;
-    font-size: 14px
+    font-size: 12px
     font-weight: 600
+    +min(mobile)
+      padding: 12px 20px
+      font-size: 14px
     &:hover
       box-shadow: 1px 1px 25px 10px rgba(146, 148, 248, 0.4);
       &::before

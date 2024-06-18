@@ -17,7 +17,7 @@
       <div v-if="icon !==''" class="flex">
         <i :class="icon" style="font-size: 20px;"></i>
       </div>
-      <input :type="typeValue" v-model="model" class="pt-[5px] pb-[5px] pl-[10px] pr-[10px] bg-transparent rounded-[6px] border-[2px] border-indigo-600 grow" >
+      <input :type="typeValue" v-model="model" class="pt-[5px] pb-[5px] pl-[10px] pr-[10px] bg-transparent rounded-[6px] border-[2px] border-[#9294F8] grow" >
     </div>
     <div v-if="placeHolderValue !== ''" class="custom-input__sub-text">{{placeHolderValue}}</div>
   </div>

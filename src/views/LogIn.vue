@@ -3,11 +3,29 @@
   import Button from '@/components/customComponents/Button.vue';
   import { ref } from "vue";
   import axios from "axios";
+  import { useAuthStore } from '../stores/auth.js'
 
 
   const emit = defineEmits(['toggleCurrentComponent']) // получаем родительские функции
   const user = ref('');
   const password = ref('');
+  const changeForm = ref(false); //переменная отвечающая за смену форм авторизации
+
+
+
+  const emailReg = ref();
+  const passwordReg = ref();
+  const nameReg = ref();
+  const surNameReg = ref();
+  const nickNameReg = ref();
+
+  const authStore = useAuthStore();
+
+  // Запрос авторизации
+  const singup = async () => {
+    await authStore.singup({name: nameReg.value, surname: surNameReg.value, nick: nickNameReg.value, email: emailReg.value, password: passwordReg.value}) // передаем данные для отправки запроса из формы
+  };
+
   
   function logIn(login, password) {
     // делаем запрос
@@ -31,12 +49,16 @@
         });
   }
 
+  function changeLogInLogOut() {
+    changeForm.value = !changeForm.value;
+  }
+
 </script>
 
 <template>
   <div class="inner">
     <div class="wrapper-form">
-      <section class="log">
+      <section v-if="changeForm" class="log"> <!-- Авторизация -->
         <div class="log__title">Авторизация в системе</div>
         <form class="log__form log-form">
           <div class="log-form__header">
@@ -44,10 +66,29 @@
             <Input typeValue="password"  title="Пароль" v-model="password" colorTextClass="text-gray-50" icon="pi pi-unlock"/>
           </div>
           <div class="log-form__bottom flex justify-center mt-[20px]">
-            <div class="log-form__btns flex aligin-center gap-[10px]">
+            <div class="log-form__btns flex flex-col md:flex-row items-center gap-[10px]">
               <!-- <button type="button" @click="logIn(user, password)">Войти в систему</button> -->
               <Button :click="logIn(user, password)" textBtn="Войти в систему"/>
-              <Button :click="logIn(user, password)" textBtn="Зарегистрироваться"/>
+              <Button :click="changeLogInLogOut" textBtn="Регистрация в системе"/>
+            </div>
+            <div class="log-form__subscibe"></div>
+          </div>
+        </form>
+      </section>
+      <section v-else class="log"> <!-- Регистрация -->
+        <div class="log__title">Регистрация в системе</div>
+        <form class="log__form log-form">
+          <div class="log-form__header">
+            <Input typeValue="text" title="Ваше Имя пользователя" v-model="nickNameReg" colorTextClass="text-gray-50" icon="pi pi-user" />
+            <Input typeValue="e-mail" title="Ваш E-mail" v-model="emailReg" colorTextClass="text-gray-50" icon="pi pi-at" />
+            <Input typeValue="text" title="Ваше Имя" v-model="nameReg" colorTextClass="text-gray-50" icon="pi pi-id-card" />
+            <Input typeValue="text" title="Ваша Фамилия" v-model="surNameReg" colorTextClass="text-gray-50" icon="pi pi-id-card" />
+            <Input typeValue="password" title="Ваш Пароль" v-model="passwordReg" colorTextClass="text-gray-50" icon="pi pi-unlock" />
+          </div>
+          <div class="log-form__bottom flex justify-center mt-[20px]">
+            <div class="log-form__btns flex flex-col md:flex-row items-center gap-[10px]">
+              <Button :click="singup" textBtn="Зарегистрироваться"/>
+              <Button :click="changeLogInLogOut" textBtn="Авторизация в системе"/>
             </div>
             <div class="log-form__subscibe"></div>
           </div>
