@@ -21,7 +21,7 @@ export const useAuthStore = defineStore('auth', () => {
     console.log(payload);
     console.log(JSON.stringify(payload));
     try {
-      let response = await axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`, JSON.stringify(payload));
+      let response = await axios.post(`http://5.35.86.160:3000/users/`, JSON.stringify(payload));
       userInfo.value = {
         token: response.idToken,
         email: response.email,

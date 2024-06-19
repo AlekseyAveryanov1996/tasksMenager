@@ -11,8 +11,6 @@
   const password = ref('');
   const changeForm = ref(false); //переменная отвечающая за смену форм авторизации
 
-
-
   const emailReg = ref();
   const passwordReg = ref();
   const nameReg = ref();
@@ -29,24 +27,22 @@
   
   function logIn(login, password) {
     // делаем запрос
-     axios
-      .post('http://5.35.86.160:3000/users/auth',
-      JSON.stringify({
-          nick: login, // логин 
-          password: password, // пароль
-        }),
-        {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-        ).then((response) => {
-          console.log(response);
-          localStorage.setItem('statusLogIn', response.statusText); // передаем статус если все правильно
-          emit('toggleCurrentComponent'); // вызываем функцию в родителе, чтобы переключить компонент
-        }).catch((error) => {
-          console.log("Неправильный логин и пароль");
-        });
+    axios.post('http://5.35.86.160:3000/users/auth', JSON.stringify({
+      nick: login, // логин 
+      password: password, // пароль
+    }),
+    {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    ).then((response) => {
+      console.log(response);
+      localStorage.setItem('statusLogIn', response.statusText); // передаем статус если все правильно
+      emit('toggleCurrentComponent'); // вызываем функцию в родителе, чтобы переключить компонент
+    }).catch((error) => {
+      console.log("Неправильный логин и пароль");
+    });
   }
 
   function changeLogInLogOut() {
@@ -67,8 +63,7 @@
           </div>
           <div class="log-form__bottom flex justify-center mt-[20px]">
             <div class="log-form__btns flex flex-col md:flex-row items-center gap-[10px]">
-              <!-- <button type="button" @click="logIn(user, password)">Войти в систему</button> -->
-              <Button :click="logIn(user, password)" textBtn="Войти в систему"/>
+              <Button :click="() => logIn(user, password)" textBtn="Войти в систему"/>
               <Button :click="changeLogInLogOut" textBtn="Регистрация в системе"/>
             </div>
             <div class="log-form__subscibe"></div>
