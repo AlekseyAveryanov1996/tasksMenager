@@ -3,9 +3,10 @@
 </script>
 
 <template>
-  <svg>
+  <!-- <svg>
     <use :xlink:href="`sprite.svg#${title}`"></use>
-  </svg>
+  </svg> -->
+  <i :class="title"></i>
 </template>
 
 <style lang="stylus" scoped>

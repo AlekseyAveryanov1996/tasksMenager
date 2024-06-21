@@ -1,6 +1,11 @@
 <script setup>
   import Aside from "@/components/Aside/Aside.vue";
-  import Button from "primevue/button";
+  import Header from "@/components/Header/Header.vue";
+  import { useRoterStore } from '../stores/router.js'
+
+  const routerStore = useRoterStore();
+
+  
 </script>
 
 <template>
@@ -8,10 +13,13 @@
     <Aside />
     <main class="main-content">
       <div class="header">
-        <Button label="Кнопка" icon="pi pi-user"/>
+        <Header />
       </div>
-      <div class="content-block">
-        <RouterView />
+      <div class="content-block p-[20px]">
+        <div class="dashboard">
+          {{routerStore.thisRouter}}
+        </div>
+        <slot></slot>
       </div>
     </main>
   </div>

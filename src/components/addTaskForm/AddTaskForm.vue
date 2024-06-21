@@ -38,29 +38,15 @@ import axios from "axios";
       subTasks: [],
     }
 
-    let response = fetch('http://5.35.86.160:3000/tasks/', {
-      method: 'POST',
+    axios.post('http://5.35.86.160:3000/tasks/', JSON.stringify(task), {
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(task)
+      }
     }).then((res) => { 
       res.status;
       getTasks(); // ОБНОВЛЯЕМ СПИСОК ЗАДАЧ
-    });
-    
+    });    
   }
-
-  /*
-  fetch('http://5.35.86.160:3000/users/auth', 
-  {method: 'POST',
-  body: JSON.stringify({
-    nick:'IgorVasin', 
-    password: 'password12345678'}),
-  headers: {'Content-Type': 'application/json'}})
-  .then(res=> res.json()).then(data => console.log(data)) */
-  
-
   
   onMounted(() => {
     getTasks();

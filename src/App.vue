@@ -1,7 +1,7 @@
 <script setup>
   import LogIn from './views/LogIn.vue';
   import HomeView from './views/HomeView.vue';
-  import { ref } from "vue";
+  import { ref} from "vue";
 
   const statusLogIn = localStorage.getItem('statusLogIn');
 
@@ -25,10 +25,14 @@
     currentComponentName.value = 'HomeView'
   };
 
+  
+
 </script>
 
 <template>
-    <component :is="components[currentComponentName]" @toggle-current-component="toggleCurrentComponent"></component>
+    <component :is="components[currentComponentName]" @toggle-current-component="toggleCurrentComponent">
+      <RouterView />
+    </component>
 </template>
 
 <style lang="stylus">

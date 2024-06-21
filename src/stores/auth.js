@@ -2,7 +2,6 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
-// const API_KEY = 'AIzaSyBXAj6sWKSNP0LBNjWDj9bL2a0r9MzrzRg'
 
 export const useAuthStore = defineStore('auth', () => {
   const userInfo = ref({
@@ -12,16 +11,13 @@ export const useAuthStore = defineStore('auth', () => {
     refreshToken: '',
   })
 
-  // const error = ref('');
-  // const loader = ref(false);
-
   const singup = async (payload) => {
-    // error.value = '';
-    // loader.value = true;
-    console.log(payload);
-    console.log(JSON.stringify(payload));
     try {
-      let response = await axios.post(`http://5.35.86.160:3000/users/`, JSON.stringify(payload));
+      let response = await axios.post(`http://5.35.86.160:3000/users/`, JSON.stringify(payload), {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
       userInfo.value = {
         token: response.idToken,
         email: response.email,

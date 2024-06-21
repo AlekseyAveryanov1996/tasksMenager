@@ -6,13 +6,13 @@
   const pages = ref([
     {
       url: '/tasks',
-      title: 'Список задач',
-      iconName: 'icon-tasks'
+      title: 'Задачи',
+      iconName: 'pi pi-list-check'
     },
     {
       url: '/users',
       title: 'Пользователи',
-      iconName: 'icon-users'
+      iconName: 'pi pi-users'
     },
   ]);
 

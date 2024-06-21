@@ -6,6 +6,11 @@ import UsersLists from '@/views/UsersLists.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // {
+    //   path: '/',
+    //   name: 'home-page',
+    //   component: '',
+    // },
     {
       path: '/tasks',
       name: 'tasks-page',
