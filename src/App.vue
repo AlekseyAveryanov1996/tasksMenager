@@ -1,9 +1,10 @@
 <script setup>
   import LogIn from './views/LogIn.vue';
   import HomeView from './views/HomeView.vue';
-  import { ref} from "vue";
+  import { ref, computed} from "vue";
 
   const statusLogIn = localStorage.getItem('statusLogIn');
+  // const statusLogInTest = ref(localStorage.getItem('statusLogIn'));
 
   // переменная для переключения шаблонов динамически
   const currentComponentName = ref('');
@@ -22,6 +23,7 @@
 
   // Переключаем компонент
   const toggleCurrentComponent = () => {
+    // console.log(statusLogInTest.value)
     currentComponentName.value = 'HomeView'
   };
 
@@ -30,9 +32,7 @@
 </script>
 
 <template>
-    <component :is="components[currentComponentName]" @toggle-current-component="toggleCurrentComponent">
-      <RouterView />
-    </component>
+    <component :is="components[currentComponentName]" @toggle-current-component="toggleCurrentComponent"></component>
 </template>
 
 <style lang="stylus">

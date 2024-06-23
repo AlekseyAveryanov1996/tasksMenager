@@ -9,7 +9,7 @@
   const emit = defineEmits(['toggleCurrentComponent']) // получаем родительские функции
   const user = ref('');
   const password = ref('');
-  const changeForm = ref(false); //переменная отвечающая за смену форм авторизации
+  const changeForm = ref(true); //переменная отвечающая за смену форм авторизации
 
   const emailReg = ref();
   const passwordReg = ref();
@@ -37,7 +37,6 @@
       }
     }
     ).then((response) => {
-      console.log(response);
       localStorage.setItem('statusLogIn', response.statusText); // передаем статус если все правильно
       emit('toggleCurrentComponent'); // вызываем функцию в родителе, чтобы переключить компонент
     }).catch((error) => {

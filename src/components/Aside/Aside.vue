@@ -1,5 +1,14 @@
 <script setup>
   import Navigation from '@/components/Navigation/Navigation.vue'
+
+  const emit = defineEmits(['toggleCurrentComponent']) // получаем родительские функции
+
+  function logOut() {
+    // localStorage.removeItem('statusLogIn');
+    // console.log(localStorage.getItem('statusLogIn'))
+    emit('toggleCurrentComponent');
+  }
+
 </script>
 
 <template>
@@ -13,7 +22,7 @@
       <Navigation />
     </div>
     <div class="aside-menu__logout absolute top-2 right-[20px] md:static">
-      <div class="exist-sistem flex ml-auto md:ml-0 gap-[10px] items-center md:pl-[20px] cursor-pointer w-fit">
+      <div @click="logOut" class="exist-sistem flex ml-auto md:ml-0 gap-[10px] items-center md:pl-[20px] cursor-pointer w-fit">
         <i class="pi pi-sign-out" style="font-size: 1.5rem"></i>
         <span class="md:text-[18px] hidden md:inline-block">Выход</span>
       </div>

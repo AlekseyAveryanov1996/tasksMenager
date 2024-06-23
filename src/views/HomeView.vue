@@ -1,25 +1,20 @@
 <script setup>
   import Aside from "@/components/Aside/Aside.vue";
   import Header from "@/components/Header/Header.vue";
-  import { useRoterStore } from '../stores/router.js'
-
-  const routerStore = useRoterStore();
-
   
+  const emit = defineEmits(['toggleCurrentComponent']) // получаем родительские функции
+
 </script>
 
 <template>
   <div class="wrapper-container">
-    <Aside />
+    <Aside @toggle-current-component="emit('toggleCurrentComponent');"/> <!--Прокидываем до App.vue чтобы переключать компоненты LogIn HomeView-->
     <main class="main-content">
       <div class="header">
         <Header />
       </div>
       <div class="content-block p-[20px]">
-        <div class="dashboard">
-          {{routerStore.thisRouter}}
-        </div>
-        <slot></slot>
+        <RouterView />
       </div>
     </main>
   </div>

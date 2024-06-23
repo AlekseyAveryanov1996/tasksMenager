@@ -10,7 +10,7 @@ export const useRoterStore = defineStore('routerStore', () => {
 
   router.afterEach((to, from, failure) => {
     thisRoute = route.fullPath;
-    console.log(thisRoute);
+    // console.log(thisRoute);
   })
 
   return { thisRoute }
