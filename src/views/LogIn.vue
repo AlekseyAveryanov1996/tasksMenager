@@ -19,30 +19,42 @@
 
   const authStore = useAuthStore();
 
-  // Запрос авторизации
+  // Запрос регистрации
   const singup = async () => {
     await authStore.singup({name: nameReg.value, surname: surNameReg.value, nick: nickNameReg.value, email: emailReg.value, password: passwordReg.value}) // передаем данные для отправки запроса из формы
   };
 
-  
-  function logIn(login, password) {
-    // делаем запрос
-    axios.post('http://5.35.86.160:3000/users/auth', JSON.stringify({
-      nick: login, // логин 
-      password: password, // пароль
-    }),
-    {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-    ).then((response) => {
-      localStorage.setItem('statusLogIn', response.statusText); // передаем статус если все правильно
-      emit('toggleCurrentComponent'); // вызываем функцию в родителе, чтобы переключить компонент
-    }).catch((error) => {
-      console.log("Неправильный логин и пароль");
-    });
+  //запрос авторизации
+
+  const singin = async() => {
+    await authStore.singIn({nick: user.value, password: password.value}, emit('toggleCurrentComponent'));
   }
+
+  function test() {
+    console.log('teeeest');
+  }
+
+  
+
+  
+  // function logIn(login, password) {
+  //   // делаем запрос
+  //   axios.post('http://5.35.86.160:3000/users/auth', JSON.stringify({
+  //     nick: login, // логин 
+  //     password: password, // пароль
+  //   }),
+  //   {
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   }
+  //   ).then((response) => {
+  //     localStorage.setItem('statusLogIn', response.statusText); // передаем статус если все правильно
+  //     emit('toggleCurrentComponent'); // вызываем функцию в родителе, чтобы переключить компонент
+  //   }).catch((error) => {
+  //     console.log("Неправильный логин и пароль");
+  //   });
+  // }
 
   function changeLogInLogOut() {
     changeForm.value = !changeForm.value;
@@ -62,7 +74,8 @@
           </div>
           <div class="log-form__bottom flex justify-center mt-[20px]">
             <div class="log-form__btns flex flex-col md:flex-row items-center gap-[10px]">
-              <Button :click="() => logIn(user, password)" textBtn="Войти в систему"/>
+              <!-- <Button :click="() => logIn(user, password)" textBtn="Войти в систему"/> -->
+              <Button :click="singin" textBtn="Войти в систему"/>
               <Button :click="changeLogInLogOut" textBtn="Регистрация в системе"/>
             </div>
             <div class="log-form__subscibe"></div>
