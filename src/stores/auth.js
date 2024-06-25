@@ -26,9 +26,10 @@ export const useAuthStore = defineStore('auth', () => {
       //   refreshToken: response.refreshToken,
       // }
       console.log(response);
+      funcEmit(); //вызываем функцию, переданную из компонента, для показа главной страницы после успешной регистрации/авторизации
     }
     catch (err) {
-      console.log('Ошибка', err);
+      console.log('Ошибка регистрации', err);
     }
   }
 
@@ -46,10 +47,7 @@ export const useAuthStore = defineStore('auth', () => {
       //   userId: response.localId,
       //   refreshToken: response.refreshToken,
       // }
-      console.log(response);
-      if (response.statusText === 'OK') {
-        funcEmit(); //вызываем функцию, переданную из компонента, для показа главной страницы после успешной регистрации
-      }
+      funcEmit(); //вызываем функцию, переданную из компонента, для показа главной страницы после успешной регистрации/авторизации
     }
     catch (err) {
       return console.log(err, "Неправильный логин и пароль");

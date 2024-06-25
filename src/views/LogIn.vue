@@ -2,7 +2,6 @@
   import Input from '@/components/customComponents/Input.vue';
   import Button from '@/components/customComponents/Button.vue';
   import { ref } from "vue";
-  import axios from "axios";
   import { useAuthStore } from '../stores/auth.js'
 
 
@@ -21,41 +20,15 @@
 
   // Запрос регистрации
   const singup = async () => {
-    await authStore.singup({name: nameReg.value, surname: surNameReg.value, nick: nickNameReg.value, email: emailReg.value, password: passwordReg.value}) // передаем данные для отправки запроса из формы
+    await authStore.singup({name: nameReg.value, surname: surNameReg.value, nick: nickNameReg.value, email: emailReg.value, password: passwordReg.value}, () => {emit('toggleCurrentComponent')}) // передаем данные для отправки запроса из формы
   };
 
   //запрос авторизации
-
   const singin = async() => {
-    await authStore.singIn({nick: user.value, password: password.value}, emit('toggleCurrentComponent'));
+    await authStore.singIn({nick: user.value, password: password.value}, () => {emit('toggleCurrentComponent')});
   }
 
-  function test() {
-    console.log('teeeest');
-  }
-
-  
-
-  
-  // function logIn(login, password) {
-  //   // делаем запрос
-  //   axios.post('http://5.35.86.160:3000/users/auth', JSON.stringify({
-  //     nick: login, // логин 
-  //     password: password, // пароль
-  //   }),
-  //   {
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   }
-  //   ).then((response) => {
-  //     localStorage.setItem('statusLogIn', response.statusText); // передаем статус если все правильно
-  //     emit('toggleCurrentComponent'); // вызываем функцию в родителе, чтобы переключить компонент
-  //   }).catch((error) => {
-  //     console.log("Неправильный логин и пароль");
-  //   });
-  // }
-
+  //смена авторизации/регистрации
   function changeLogInLogOut() {
     changeForm.value = !changeForm.value;
   }
@@ -137,6 +110,4 @@
       display: flex
       flex-direction: column
       gap: 20px
-      
-      
 </style>
