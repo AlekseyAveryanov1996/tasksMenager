@@ -1,7 +1,8 @@
 <script setup>
   import Input from '@/components/customComponents/Input.vue';
   import Button from '@/components/customComponents/Button.vue';
-  import { ref } from "vue";
+  
+  import { ref} from "vue";
   import { useAuthStore } from '../stores/auth.js'
 
 
@@ -30,6 +31,7 @@
 
   //смена авторизации/регистрации
   function changeLogInLogOut() {
+    authStore.error = ''; // стираем сообщение об ошибке при переключении
     changeForm.value = !changeForm.value;
   }
 
@@ -40,6 +42,14 @@
     <div class="wrapper-form">
       <section v-if="changeForm" class="log"> <!-- Авторизация -->
         <div class="log__title">Авторизация в системе</div>
+        <div class="error-message flex gap-[10px] items-center text-red-600 font-bold" v-if="authStore.error">
+          <div class="error-message__icon text-[24px]">
+            <i class="pi pi-exclamation-triangle"></i>
+          </div>
+          <div class="error-message__text">
+            {{ authStore.error }}
+          </div>
+        </div>
         <form class="log__form log-form">
           <div class="log-form__header">
             <Input typeValue="text" title="Имя пользователя" v-model="user" colorTextClass="text-gray-50" icon="pi pi-user" />
@@ -51,12 +61,19 @@
               <Button :click="singin" textBtn="Войти в систему"/>
               <Button :click="changeLogInLogOut" textBtn="Регистрация в системе"/>
             </div>
-            <div class="log-form__subscibe"></div>
           </div>
         </form>
       </section>
       <section v-else class="log"> <!-- Регистрация -->
         <div class="log__title">Регистрация в системе</div>
+        <div class="error-message flex gap-[10px] items-center text-red-600 font-bold" v-if="authStore.error">
+          <div class="error-message__icon text-[24px]">
+            <i class="pi pi-exclamation-triangle"></i>
+          </div>
+          <div class="error-message__text">
+            {{ authStore.error }}
+          </div>
+        </div>
         <form class="log__form log-form">
           <div class="log-form__header">
             <Input typeValue="text" title="Ваше Имя пользователя" v-model="nickNameReg" colorTextClass="text-gray-50" icon="pi pi-user" />
