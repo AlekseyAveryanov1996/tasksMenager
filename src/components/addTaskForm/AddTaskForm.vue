@@ -1,10 +1,10 @@
 <script setup>
-import Input from '@/components/customComponents/Input.vue'
-import Select from '@/components/customComponents/Select.vue'
-import DateInput from '@/components/customComponents/DateInput.vue'
-import { ref, onMounted } from 'vue';
-import axios from "axios";
-  
+  import Input from '@/components/customComponents/Input.vue'
+  import Select from '@/components/customComponents/Select.vue'
+  import DateInput from '@/components/customComponents/DateInput.vue'
+  import { ref, onMounted } from 'vue';
+  import axios from "axios";
+
   const tasks = ref([]);
 
   let inputTasks = ref('');
@@ -15,39 +15,43 @@ import axios from "axios";
   let endDate = ref('');
 
   // ПОЛУЧАЕМ СПИСОК ЗАДАЧ
-  function getTasks() {
-    axios
-      .get("http://5.35.86.160:3000/tasks/")
-      .then((response) => {
-        tasks.value = response.data;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  function addTask(e) {
-    e.preventDefault();
-    let task = {
-      title: inputTasks.value, //Заголовок
-      description: inputDescription.value, // Описание
-      userFrom: directorTask.value, // Постановщик
-      userTo: responsibleTask.value, // Ответственный
-      dateCreate: startDate.value.getTime(), // Дата начала работ
-      dateTo: endDate.value.getTime(), // Дата окончания работ
-      subTasks: [],
+  const getTasks = async () => {
+    try {
+      let response = await axios.get("http://5.35.86.160:3000/tasks/")
+      tasks.value = response.data;
     }
-
-    axios.post('http://5.35.86.160:3000/tasks/', JSON.stringify(task), {
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      }
-    }).then((res) => { 
-      res.status;
-      getTasks(); // ОБНОВЛЯЕМ СПИСОК ЗАДАЧ
-    });    
+    catch(err) {
+      console.log(err);
+    }
   }
-  
+
+  // Добавление задачи
+  const addTask = (e) => {
+    try {
+      e.preventDefault();
+      let task = {
+        title: inputTasks.value, //Заголовок
+        description: inputDescription.value, // Описание
+        userFrom: directorTask.value, // Постановщик
+        userTo: responsibleTask.value, // Ответственный
+        dateCreate: startDate.value.getTime(), // Дата начала работ
+        dateTo: endDate.value.getTime(), // Дата окончания работ
+        subTasks: [],
+      }
+      let response = axios.post('http://5.35.86.160:3000/tasks/', JSON.stringify(task), {
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        }
+      })
+      response.status;
+      getTasks();
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
+
+  //Получаем при загрузке страницы
   onMounted(() => {
     getTasks();
   });
@@ -63,9 +67,7 @@ import axios from "axios";
     <DateInput titleDate="Дата начала:" v-model="startDate"/>
     <DateInput titleDate="Выполнить до:" v-model="endDate"/>
     <button @click="addTask">Добавить задачу</button>
-
   </form>
-  
 
   <div class="tasks">
     <div class="tasks__title">Список задач:</div>

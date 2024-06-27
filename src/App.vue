@@ -1,7 +1,7 @@
 <script setup>
   import LogIn from './views/LogIn.vue';
   import HomeView from './views/HomeView.vue';
-  import { ref, computed} from "vue";
+  import { ref } from "vue";
 
   const statusLogIn = localStorage.getItem('statusLogIn');
   // const statusLogInTest = ref(localStorage.getItem('statusLogIn'));

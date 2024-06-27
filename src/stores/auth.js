@@ -9,6 +9,9 @@ export const useAuthStore = defineStore('auth', () => {
     email: '',
     userId: '',
     refreshToken: '',
+    nick: '',
+    name: '',
+    surname: ''
   })
 
   const error = ref('');
@@ -22,13 +25,17 @@ export const useAuthStore = defineStore('auth', () => {
           'Content-Type': 'application/json'
         }
       });
-      // userInfo.value = {
-      //   token: response.idToken,
-      //   email: response.email,
-      //   userId: response.localId,
-      //   refreshToken: response.refreshToken,
-      // }
+      userInfo.value = {
+        token: response.data.token_acc,
+        email: response.data.email,
+        userId: response.data.id,
+        refreshToken: response.data.token_ref,
+        nick: response.data.nick,
+        name: response.data.name,
+        surname: response.data.surname,
+      }
       console.log(response);
+      console.log(userInfo.value);
       funcEmit(); //вызываем функцию, переданную из компонента, для показа главной страницы после успешной регистрации/авторизации
     }
     catch (err) {
@@ -50,12 +57,16 @@ export const useAuthStore = defineStore('auth', () => {
           'Content-Type': 'application/json'
         }
       });
-      // userInfo.value = {
-      //   token: response.idToken,
-      //   email: response.email,
-      //   userId: response.localId,
-      //   refreshToken: response.refreshToken,
-      // }
+      userInfo.value = {
+        token: response.data.token_acc,
+        email: response.data.email,
+        userId: response.data.id,
+        refreshToken: response.data.token_ref,
+        nick: response.data.nick,
+        name: response.data.name,
+        surname: response.data.surname,
+      }
+      localStorage.setItem('userTokens', JSON.stringify({token: userInfo.value.token, refreshToken: userInfo.value.refreshToken, userId: userInfo.value.userId}))
       funcEmit(); //вызываем функцию, переданную из компонента, для показа главной страницы после успешной регистрации/авторизации
     }
     catch (err) {
