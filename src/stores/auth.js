@@ -34,8 +34,7 @@ export const useAuthStore = defineStore('auth', () => {
         name: response.data.name,
         surname: response.data.surname,
       }
-      console.log(response);
-      console.log(userInfo.value);
+      localStorage.setItem('userTokens', JSON.stringify({token: userInfo.value.token, refreshToken: userInfo.value.refreshToken, userId: userInfo.value.userId})) // нужно для того, чтобы запомнить состояние пользователя
       funcEmit(); //вызываем функцию, переданную из компонента, для показа главной страницы после успешной регистрации/авторизации
     }
     catch (err) {
@@ -66,7 +65,7 @@ export const useAuthStore = defineStore('auth', () => {
         name: response.data.name,
         surname: response.data.surname,
       }
-      localStorage.setItem('userTokens', JSON.stringify({token: userInfo.value.token, refreshToken: userInfo.value.refreshToken, userId: userInfo.value.userId}))
+      localStorage.setItem('userTokens', JSON.stringify({token: userInfo.value.token, refreshToken: userInfo.value.refreshToken, userId: userInfo.value.userId})) // нужно для того, чтобы запомнить состояние пользователя
       funcEmit(); //вызываем функцию, переданную из компонента, для показа главной страницы после успешной регистрации/авторизации
     }
     catch (err) {
@@ -77,5 +76,8 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  return { singup, singIn, userInfo, error }
+  // переменная для переключения шаблонов авторизации динамически
+  const currentComponentName = ref('LogIn');
+
+  return { singup, singIn, userInfo, error, currentComponentName }
 })

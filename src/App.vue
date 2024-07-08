@@ -2,18 +2,24 @@
   import LogIn from './views/LogIn.vue';
   import HomeView from './views/HomeView.vue';
   import { ref } from "vue";
+  import { useAuthStore } from '@/stores/auth.js' 
 
-  const statusLogIn = localStorage.getItem('statusLogIn');
-  // const statusLogInTest = ref(localStorage.getItem('statusLogIn'));
+  const authStore = useAuthStore();
 
   // переменная для переключения шаблонов динамически
-  const currentComponentName = ref('');
+  //const currentComponentName = ref('LogIn');
 
-  if (statusLogIn === 'OK') {
-    currentComponentName.value = 'HomeView';
-  } else {
-    currentComponentName.value = 'LogIn';
+  // получаем токены из локал для записи в store для сохранения авторизации
+  const checkUser = () => {
+    const tokens = JSON.parse(localStorage.getItem('userTokens'));
+    if (tokens) {
+      authStore.userInfo.token = tokens.token;
+      authStore.userInfo.refreshToken = tokens.refreshToken;
+      authStore.currentComponentName = 'HomeView'
+    }
   }
+
+  checkUser();
 
   // объект с шаблоанами для переключения
   const components = {
@@ -23,8 +29,7 @@
 
   // Переключаем компонент
   const toggleCurrentComponent = () => {
-    // console.log(statusLogInTest.value)
-    currentComponentName.value = 'HomeView'
+    authStore.currentComponentName = 'HomeView'
   };
 
   
@@ -32,7 +37,7 @@
 </script>
 
 <template>
-    <component :is="components[currentComponentName]" @toggle-current-component="toggleCurrentComponent"></component>
+    <component :is="components[authStore.currentComponentName]" @toggle-current-component="toggleCurrentComponent"></component>
 </template>
 
 <style lang="stylus">
