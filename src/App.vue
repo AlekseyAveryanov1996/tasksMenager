@@ -1,13 +1,9 @@
 <script setup>
   import LogIn from './views/LogIn.vue';
   import HomeView from './views/HomeView.vue';
-  import { ref } from "vue";
   import { useAuthStore } from '@/stores/auth.js' 
 
   const authStore = useAuthStore();
-
-  // переменная для переключения шаблонов динамически
-  //const currentComponentName = ref('LogIn');
 
   // получаем токены из локал для записи в store для сохранения авторизации
   const checkUser = () => {

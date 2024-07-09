@@ -21,7 +21,10 @@
       tasks.value = response.data;
     }
     catch(err) {
-      console.log(err);
+      // если пользователь не авторизован, то выкидываем его на авторизацию
+      // if (err.response.status === 401) {
+      //   authStore.currentComponentName = 'LogIn';
+      // }
     }
   }
 
@@ -47,7 +50,10 @@
       getTasks();
     }
     catch (err) {
-      console.log(err)
+      // если пользователь не авторизован, то выкидываем его на авторизацию
+      // if (err.response.status === 401) {
+      //   authStore.currentComponentName = 'LogIn';
+      // }
     }
   }
 

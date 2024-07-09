@@ -38,7 +38,6 @@ export const useAuthStore = defineStore('auth', () => {
       funcEmit(); //вызываем функцию, переданную из компонента, для показа главной страницы после успешной регистрации/авторизации
     }
     catch (err) {
-      console.log(err);
       if (err.response.data.message === 'Bad Request') {
         error.value = 'Заполните все поля для регистрации'
       } else if (err.response.data.message === 'User with email or nick exist') {
@@ -69,7 +68,6 @@ export const useAuthStore = defineStore('auth', () => {
       funcEmit(); //вызываем функцию, переданную из компонента, для показа главной страницы после успешной регистрации/авторизации
     }
     catch (err) {
-      console.log(err.response);
       if (err.response.status === 401) {
         error.value = 'Неправильный логин или пароль'
       }
