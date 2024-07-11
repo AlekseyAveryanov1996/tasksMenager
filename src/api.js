@@ -33,7 +33,10 @@ axiosApiInstanse.interceptors.response.use(
               'authorization': `Bearer ${JSON.parse(localStorage.getItem('userTokens')).refreshToken}`
             }
           })
-          console.log(newTokens);
+          console.log(newTokens.data);
+          authStore.userInfo.token = newTokens.data.token_acc;
+          authStore.userInfo.refreshToken = newTokens.data.token_ref;
+          localStorage.setItem('userTokens', JSON.stringify({token: newTokens.data.token_acc, refreshToken: newTokens.data.token_ref}))
         } 
         catch(error) {
           console.log(error);
