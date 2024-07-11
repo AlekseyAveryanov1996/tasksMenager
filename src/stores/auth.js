@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import axios from 'axios'
+import axiosApiInstanse from '@/api';
 
 
 export const useAuthStore = defineStore('auth', () => {
@@ -20,7 +20,7 @@ export const useAuthStore = defineStore('auth', () => {
   const singup = async (payload, funcEmit) => {
     error.value = '';
     try {
-      let response = await axios.post(`http://5.35.86.160:3000/users/`, JSON.stringify(payload), {
+      let response = await axiosApiInstanse.post(`http://5.35.86.160:3000/users/`, JSON.stringify(payload), {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -50,7 +50,7 @@ export const useAuthStore = defineStore('auth', () => {
   const singIn = async (payload, funcEmit) => {
     error.value = '';
     try {
-      let response = await axios.post(`http://5.35.86.160:3000/users/auth`, JSON.stringify(payload), {
+      let response = await axiosApiInstanse.post(`http://5.35.86.160:3000/users/auth`, JSON.stringify(payload), {
         headers: {
           'Content-Type': 'application/json'
         }

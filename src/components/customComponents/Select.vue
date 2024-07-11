@@ -1,13 +1,14 @@
 <script setup>
   import { onMounted, ref } from "vue";
   import axios from "axios";
+  import axiosApiInstanse from '@/api';
 
   defineProps(['titleSelect']);
   const model = defineModel();
   const users = ref([]); // записываем сюда юзеров
 
   onMounted(() => {
-    axios
+    axiosApiInstanse
       .get("http://5.35.86.160:3000/users/")
       .then((response) => {
         users.value = response.data;

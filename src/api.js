@@ -1,10 +1,12 @@
 import { useAuthStore } from '@/stores/auth.js'
 import axios from "axios";
 
-axios.interceptors.request.use(
+const axiosApiInstanse = axios.create();
+
+axiosApiInstanse.interceptors.request.use(
   (config) => {
-    // если не авторизация и не регистрация
-    if (config.url !== 'http://5.35.86.160:3000/users/' || config.url !== 'http://5.35.86.160:3000/users/auth/') {
+    // если не авторизация
+    if (config.url !== 'http://5.35.86.160:3000/users/auth' && config.url !== 'http://5.35.86.160:3000/users/refresh/') {
       const authStore = useAuthStore(); // получаем данные из стора
       config.headers.authorization = `Bearer ${authStore.userInfo.token}`; // добавляем в header токен
     }
@@ -12,19 +14,35 @@ axios.interceptors.request.use(
   }, 
 );
 
-axios.interceptors.response.use(
+axiosApiInstanse.interceptors.response.use(
   (response) => {
     return response;
   },
-  (error) => {
-    // если не авторизация и не регистрация
-    if (error.request.responseURL !== 'http://5.35.86.160:3000/users/' || error.request.responseURL !== 'http://5.35.86.160:3000/users/auth/') {
+  async (error) => {
+    const originalRequest = error.config;
+    // если не авторизация
+    if (error.request.responseURL !== 'http://5.35.86.160:3000/users/auth/') {
       //Проверяем авторизован ли пользователь, если нет показываем компонент авторизации
-      if (error.response.status === 401) {
+      if (error.response.status === 500) {
         const authStore = useAuthStore(); // получаем данные из стора
-        authStore.currentComponentName = 'LogIn';
+        // authStore.currentComponentName = 'LogIn';
+        try {
+          //делаем новый запрос для обновления токенов
+          const newTokens = await axios.get('http://5.35.86.160:3000/users/refresh/', {
+            headers: {
+              'authorization': `Bearer ${JSON.parse(localStorage.getItem('userTokens')).refreshToken}`
+            }
+          })
+          console.log(newTokens);
+        } 
+        catch(error) {
+          console.log(error);
+        }
       }
+      // console.log(error);
     }
     return Promise.reject(error);
   }
 )
+
+export default axiosApiInstanse;

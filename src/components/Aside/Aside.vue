@@ -1,12 +1,12 @@
 <script setup>
   import Navigation from '@/components/Navigation/Navigation.vue'
+  import { useAuthStore } from '@/stores/auth.js' 
 
-  const emit = defineEmits(['toggleCurrentComponent']) // получаем родительские функции
+  const authStore = useAuthStore();
 
   function logOut() {
-    // localStorage.removeItem('statusLogIn');
-    // console.log(localStorage.getItem('statusLogIn'))
-    emit('toggleCurrentComponent');
+    localStorage.removeItem('userTokens'); // удаляем пару из localStorage
+    authStore.currentComponentName = 'LogIn'; // показываем компонент авторизации
   }
 
 </script>
