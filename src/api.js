@@ -19,7 +19,6 @@ axiosApiInstanse.interceptors.response.use(
     return response;
   },
   async (error) => {
-    const originalRequest = error.config;
     // если не авторизация
     if (error.request.responseURL !== 'http://5.35.86.160:3000/users/auth/') {
       //Проверяем авторизован ли пользователь, если нет показываем компонент авторизации
