@@ -25,24 +25,23 @@ axiosApiInstanse.interceptors.response.use(
       //Проверяем авторизован ли пользователь, если нет показываем компонент авторизации
       if (error.response.status === 500) {
         const authStore = useAuthStore(); // получаем данные из стора
-        // authStore.currentComponentName = 'LogIn';
         try {
           //делаем новый запрос для обновления токенов
           const newTokens = await axios.get('http://5.35.86.160:3000/users/refresh/', {
             headers: {
-              'authorization': `Bearer ${JSON.parse(localStorage.getItem('userTokens')).refreshToken}`
+              'authorization': `Bearer ${JSON.parse(localStorage.getItem('userTokens')).refreshToken}` // передаем refresh токент
             }
           })
-          console.log(newTokens.data);
+          // обновляем сторе новыми токенами
           authStore.userInfo.token = newTokens.data.token_acc;
           authStore.userInfo.refreshToken = newTokens.data.token_ref;
           localStorage.setItem('userTokens', JSON.stringify({token: newTokens.data.token_acc, refreshToken: newTokens.data.token_ref}))
+          return axiosApiInstanse.request(error.config); // делаем еще раз запрос с новыми токенами в случае ошибки
         } 
         catch(error) {
-          console.log(error);
+          authStore.currentComponentName = 'LogIn'; // если refresh тоже закончился, то выкидываем на авторизацию.
         }
       }
-      // console.log(error);
     }
     return Promise.reject(error);
   }

@@ -3,7 +3,6 @@
   import Select from '@/components/customComponents/Select.vue'
   import DateInput from '@/components/customComponents/DateInput.vue'
   import { ref, onMounted } from 'vue';
-  import axios from "axios";
   import axiosApiInstanse from '@/api';
 
   const tasks = ref([]);
@@ -30,7 +29,7 @@
   }
 
   // Добавление задачи
-  const addTask = (e) => {
+  const addTask = async (e) => {
     try {
       e.preventDefault();
       let task = {
@@ -42,7 +41,7 @@
         dateTo: endDate.value.getTime(), // Дата окончания работ
         subTasks: [],
       }
-      let response = axiosApiInstanse.post('http://5.35.86.160:3000/tasks/', JSON.stringify(task), {
+      let response = await axiosApiInstanse.post('http://5.35.86.160:3000/tasks/', JSON.stringify(task), {
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
         }
