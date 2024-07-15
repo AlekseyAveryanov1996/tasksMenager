@@ -26,7 +26,7 @@ axiosApiInstanse.interceptors.response.use(
         const authStore = useAuthStore(); // получаем данные из стора
         try {
           //делаем новый запрос для обновления токенов
-          const newTokens = await axios.get('http://5.35.86.160:3000/users/refresh/', {
+          const newTokens = await axiosApiInstanse.get('http://5.35.86.160:3000/users/refresh/', {
             headers: {
               'authorization': `Bearer ${JSON.parse(localStorage.getItem('userTokens')).refreshToken}` // передаем refresh токент
             }
@@ -34,7 +34,7 @@ axiosApiInstanse.interceptors.response.use(
           // обновляем сторе новыми токенами
           authStore.userInfo.token = newTokens.data.token_acc;
           authStore.userInfo.refreshToken = newTokens.data.token_ref;
-          localStorage.setItem('userTokens', JSON.stringify({token: newTokens.data.token_acc, refreshToken: newTokens.data.token_ref}))
+          localStorage.setItem('userTokens', JSON.stringify({token: newTokens.data.token_acc, refreshToken: newTokens.data.token_ref, userId: authStore.userInfo.userId}))
           return axiosApiInstanse.request(error.config); // делаем еще раз запрос с новыми токенами в случае ошибки
         } 
         catch(error) {

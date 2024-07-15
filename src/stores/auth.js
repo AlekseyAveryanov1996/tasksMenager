@@ -66,6 +66,7 @@ export const useAuthStore = defineStore('auth', () => {
       }
       localStorage.setItem('userTokens', JSON.stringify({token: userInfo.value.token, refreshToken: userInfo.value.refreshToken, userId: userInfo.value.userId})) // нужно для того, чтобы запомнить состояние пользователя
       funcEmit(); //вызываем функцию, переданную из компонента, для показа главной страницы после успешной регистрации/авторизации
+      console.log(userInfo);
     }
     catch (err) {
       if (err.response.status === 401) {
