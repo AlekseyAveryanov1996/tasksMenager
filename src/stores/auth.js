@@ -78,5 +78,8 @@ export const useAuthStore = defineStore('auth', () => {
   // переменная для переключения шаблонов авторизации динамически
   const currentComponentName = ref('LogIn');
 
-  return { singup, singIn, userInfo, error, currentComponentName }
+  //переменная для определения активного юзера
+  const activeUser = ref(null);
+
+  return { singup, singIn, userInfo, error, currentComponentName, activeUser }
 })
