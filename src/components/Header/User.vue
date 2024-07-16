@@ -6,7 +6,7 @@
 
   const getActiveUser = async () => {
     try {
-      let response = await axiosApiInstanse.get('http://5.35.86.160:3000/users/me');
+      let response = await axiosApiInstanse.get('https://5.35.86.160:3000/users/me');
       activeUser.value = response.data;
     }
     catch {

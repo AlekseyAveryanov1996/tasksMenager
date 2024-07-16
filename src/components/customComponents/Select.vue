@@ -8,7 +8,7 @@
 
   onMounted(() => {
     axiosApiInstanse
-      .get("http://5.35.86.160:3000/users/")
+      .get("https://5.35.86.160:3000/users/")
       .then((response) => {
         users.value = response.data;
       })
