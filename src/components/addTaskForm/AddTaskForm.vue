@@ -17,7 +17,7 @@
   // ПОЛУЧАЕМ СПИСОК ЗАДАЧ
   const getTasks = async () => {
     try {
-      let response = await axiosApiInstanse.get("https://5.35.86.160:3000/tasks/")
+      let response = await axiosApiInstanse.get("https://todotasks-api.ru/tasks/")
       tasks.value = response.data;
     }
     catch(err) {
@@ -41,7 +41,7 @@
         dateTo: endDate.value.getTime(), // Дата окончания работ
         subTasks: [],
       }
-      let response = await axiosApiInstanse.post('https://5.35.86.160:3000/tasks/', JSON.stringify(task), {
+      let response = await axiosApiInstanse.post('https://todotasks-api.ru/tasks/', JSON.stringify(task), {
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
         }

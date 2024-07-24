@@ -20,7 +20,7 @@ export const useAuthStore = defineStore('auth', () => {
   const singup = async (payload, funcEmit) => {
     error.value = '';
     try {
-      let response = await axiosApiInstanse.post(`https://5.35.86.160:3000/users/`, JSON.stringify(payload), {
+      let response = await axiosApiInstanse.post(`https://todotasks-api.ru/users/`, JSON.stringify(payload), {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -50,7 +50,7 @@ export const useAuthStore = defineStore('auth', () => {
   const singIn = async (payload, funcEmit) => {
     error.value = '';
     try {
-      let response = await axiosApiInstanse.post(`https://5.35.86.160:3000/users/auth`, JSON.stringify(payload), {
+      let response = await axiosApiInstanse.post(`https://todotasks-api.ru/users/auth`, JSON.stringify(payload), {
         headers: {
           'Content-Type': 'application/json'
         }

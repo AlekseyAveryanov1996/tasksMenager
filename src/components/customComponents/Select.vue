@@ -8,7 +8,7 @@
 
   onMounted(() => {
     axiosApiInstanse
-      .get("https://5.35.86.160:3000/users/")
+      .get("https://todotasks-api.ru/users/")
       .then((response) => {
         users.value = response.data;
       })
